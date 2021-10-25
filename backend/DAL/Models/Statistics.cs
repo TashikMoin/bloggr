@@ -1,10 +1,19 @@
-﻿namespace DAL.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DAL.Models
 {
-    class Statistics
+    public class Statistics
     {
+        [Required]
         public int Likes { get; set; }
+
+        [Required]
         public int Views { get; set; }
+
+        [Key]
+        [Required]
         public int Blog_Id { get; set; }
-        public int Posted_By { get; set; }
+
+        public Blog Blog { get; set; }
     }
 }
