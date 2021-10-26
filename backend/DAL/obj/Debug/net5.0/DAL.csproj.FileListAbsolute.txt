@@ -1,0 +1,15 @@
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\DAL.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.pdb
+C:\Users\TashikMoin\Desktop\Bloggr\backend\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache

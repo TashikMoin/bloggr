@@ -1,7 +1,7 @@
 ﻿using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Contexts
+namespace API.Contexts
 {
     public class BloggrContext : DbContext
     {

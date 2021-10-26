@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
 {
     public class Statistics
     {
+
         [Required]
         public int Likes { get; set; }
 
@@ -11,7 +13,7 @@ namespace DAL.Models
         public int Views { get; set; }
 
         [Key]
-        [Required]
+        [ForeignKey("Blog")]
         public int Blog_Id { get; set; }
 
         public Blog Blog { get; set; }
