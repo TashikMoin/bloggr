@@ -7,6 +7,9 @@ namespace DAL.Models
     public class Blog
     {
         [Key]
+        [ScaffoldColumn(false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Blog_Id autogeneration.
+        [Required]
         public int Blog_Id { get; set; }
 
         [Required]
@@ -25,7 +28,7 @@ namespace DAL.Models
         public string Content { get; set; }
 
         [Required]
-        public DateTime Posted_At { get; set; }
+        public DateTime Posted_At = DateTime.Now;
 
         // Navigation Property (Foreign Key)
         [ForeignKey("User")]

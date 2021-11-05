@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
 {
+    [Index(nameof(Email), IsUnique = true)]
     public class User
     {
         [Key]
+        [ScaffoldColumn(false)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // User_Id autogeneration.
         [Required]
         public int User_Id { get; set; }
 
@@ -13,8 +18,6 @@ namespace DAL.Models
         public string Email { get; set; }
 
         [Required]
-        [MinLength(8)]
-        [MaxLength(25)]
         public string Password { get; set; }
 
         [Required]

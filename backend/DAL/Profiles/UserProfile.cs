@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DAL.Externals.UserExternals;
+using DAL.Models;
 
 namespace DAL.Profiles
 {
@@ -6,7 +8,12 @@ namespace DAL.Profiles
     {
         public UserProfile()
         {
-
+            CreateMap<User, ReadUser>().PreserveReferences();
+            CreateMap<ReadUser, User>().PreserveReferences();
+            CreateMap<User, WriteUser>().PreserveReferences();
+            CreateMap<WriteUser, User>().PreserveReferences();
+            CreateMap<User, UpdateUser>().PreserveReferences();
+            CreateMap<UpdateUser, User>().PreserveReferences();
         }
     }
 }

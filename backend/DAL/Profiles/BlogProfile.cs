@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DAL.Externals.BlogExternals;
+using DAL.Models;
 
 namespace DAL.Profiles
 {
@@ -6,7 +8,12 @@ namespace DAL.Profiles
     {
         public BlogProfile()
         {
-
+            CreateMap<Blog, ReadBlog>().PreserveReferences();
+            CreateMap<ReadBlog, Blog>().PreserveReferences();
+            CreateMap<Blog, WriteBlog>().PreserveReferences();
+            CreateMap<WriteBlog, Blog>().PreserveReferences();
+            CreateMap<Blog, UpdateBlog>().PreserveReferences();
+            CreateMap<UpdateBlog, Blog>().PreserveReferences();
         }
     }
 }

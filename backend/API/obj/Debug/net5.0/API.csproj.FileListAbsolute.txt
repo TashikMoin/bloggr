@@ -22,7 +22,6 @@ C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.Identi
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -60,3 +59,11 @@ C:\Users\TashikMoin\Desktop\Bloggr\backend\API\obj\Debug\net5.0\API.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\obj\Debug\net5.0\ref\API.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\obj\Debug\net5.0\API.pdb
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\obj\Debug\net5.0\API.genruntimeconfig.cache
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\BCrypt.Net-Next.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

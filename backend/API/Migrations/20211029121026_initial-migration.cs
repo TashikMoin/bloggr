@@ -13,8 +13,8 @@ namespace API.Migrations
                 {
                     User_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Firstname = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Lastname = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -69,6 +69,12 @@ namespace API.Migrations
                 name: "IX_Blog_User_Id",
                 table: "Blog",
                 column: "User_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_Email",
+                table: "User",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
