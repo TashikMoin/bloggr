@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from "@material-ui/core/styles";
-import styles from "./register.module.css";
+import styles from "./styles/register.module.css";
 import Container from "@material-ui/core/Container";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
