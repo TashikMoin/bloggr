@@ -38,9 +38,9 @@ namespace API.Providers
             return Query.Blog.FirstOrDefault(x => x.Blog_Id == Blog_Id);
         }
 
-        public IEnumerable<Blog> GetBlogs()
+        public IEnumerable<Blog> GetBlogs(int User_Id)
         {
-            return Query.Blog.ToList();
+            return Query.Blog.ToList().Where(x => x.User_Id == User_Id);
         }
 
         public bool SaveChanges()

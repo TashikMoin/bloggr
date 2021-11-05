@@ -12,6 +12,6 @@ namespace DAL.Externals.BlogExternals
 
         public string Content { get; set; }
 
-        public DateTime Posted_At;
+        public DateTime Posted_At { get; set; }
     }
 }

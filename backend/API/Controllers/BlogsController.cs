@@ -6,19 +6,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class BlogController : ControllerBase
+    public class BlogsController : ControllerBase
     {
         private IBlogContract Blog_Provider { get; set; }
         private IMapper Mapper { get; set; }
-        public BlogController(IBlogContract _Blog_Provider, IMapper _Mapper)
+        public BlogsController(IBlogContract _Blog_Provider, IMapper _Mapper)
         {
             Mapper = _Mapper;
             Blog_Provider = _Blog_Provider;
@@ -41,15 +39,18 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ReadBlog>> GetBlogs()
         {
-            var Blogs = Blog_Provider.GetBlogs();
+            int JWT_Claim_User_Id = Int32.Parse(User.FindFirst("Id").Value);
+            var Blogs = Blog_Provider.GetBlogs(JWT_Claim_User_Id);
             return Ok(Mapper.Map<IEnumerable<ReadBlog>>(Blogs));
         }
 
-        [Route("~/api/CreateBlog")]
+        [Route("~/api/NewBlog")]
         [HttpPost]
         public ActionResult<ReadBlog> CreateBlog(WriteBlog _New_Blog)
         {
-            var New_Blog = Mapper.Map<Blog>(_New_Blog); 
+            int JWT_Claim_User_Id = Int32.Parse(User.FindFirst("Id").Value);
+            var New_Blog = Mapper.Map<Blog>(_New_Blog);
+            New_Blog.User_Id = JWT_Claim_User_Id;
             Blog_Provider.CreateBlog(New_Blog);
             Blog_Provider.SaveChanges();
             var Read_Blog = Mapper.Map<ReadBlog>(New_Blog);

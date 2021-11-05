@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace API.Controllers
 {
@@ -87,7 +88,7 @@ namespace API.Controllers
         public ActionResult DeleteEmployee(int Id)
         {
             var JWT_Claim_User_Id = User.FindFirst("Id").Value;
-            if (User_Provider.isLoggedIn(Id, Int32.Parse(JWT_Claim_User_Id) ))
+            if (User_Provider.isLoggedIn(Id, Int32.Parse(JWT_Claim_User_Id)))
             {
                 var Current_User = User_Provider.GetUser(Id);
                 if (Current_User == null)
@@ -107,12 +108,14 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult Login(Credentials Credentials)
         {
-            var Token = User_Provider.Authenticate(Credentials);
-            if (Token == null)
+            dynamic Token_Object = new ExpandoObject();
+            Token_Object.Token = User_Provider.Authenticate(Credentials);
+            if (Token_Object.Token == null)
             {
                 return Unauthorized();
             }
-            return Ok(Token);
+            return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(Token_Object));
+            // conversion to json object
         }
     }
 }
