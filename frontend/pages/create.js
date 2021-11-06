@@ -16,7 +16,7 @@ export default function Create() {
 
     return (
         <Container className={styles.container}>
-            <Grid container direction="column" justifyContent="center" alignItems="stretch">
+            <Grid container direction="row" justifyContent="flex-start" alignItems="stretch">
                 <Grid
                     container
                     direction="row"
@@ -32,7 +32,7 @@ export default function Create() {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" style={{paddingTop: "50px"}} >
+            <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" style={{ paddingTop: "50px" }} >
                 <Grid item xs={12}>
                     {CustomEditor && <CustomEditor />}
                 </Grid>
