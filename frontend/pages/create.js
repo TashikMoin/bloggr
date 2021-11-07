@@ -1,18 +1,21 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 
 import styles from "./styles/create.module.css";
 
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import {
+    Container,
+    Grid,
+    TextField
+} from "@material-ui/core";
 
 export default function Create() {
 
-    let CustomEditor;
+    // let CustomEditor;
 
-    if (typeof window != "undefined") {
-        CustomEditor = dynamic(() => import('../components/CustomerEditor/CustomerEditor'));
-    }
+    // if (typeof window != "undefined") {
+    //     CustomEditor = dynamic(() => import('../components/CustomerEditor/CustomerEditor'));
+    // }
 
     return (
         <Container className={styles.container}>
@@ -33,8 +36,41 @@ export default function Create() {
                 </Grid>
             </Grid>
             <Grid container direction="row" justifyContent="flex-start" alignItems="stretch" style={{ paddingTop: "50px" }} >
-                <Grid item xs={12}>
-                    {CustomEditor && <CustomEditor />}
+                <Grid item xs={12} className={styles.contentShowcase}>
+                    <div className={styles.centerTextField}>
+                        <TextField
+                            id="standard-multiline-static"
+                            label="Title"
+                            multiline
+                            rows={4}
+                            defaultValue="Lorem Ipsum"
+                            variant="standard"
+                            className={styles.textFieldStyling}
+                        />
+                    </div>
+                    <div className={styles.centerTextField}>
+                        <TextField
+                            id="standard-multiline-static"
+                            label="Description"
+                            multiline
+                            rows={4}
+                            defaultValue="Lorem Ipsum"
+                            variant="standard"
+                            className={styles.textFieldStyling}
+                        />
+                    </div>
+                    <div className={styles.centerTextField}>
+                        <TextField
+                            id="standard-multiline-static"
+                            label="Content"
+                            multiline
+                            rows={4}
+                            defaultValue="Lorem Ipsum"
+                            variant="standard"
+                            className={styles.textFieldStyling}
+                        />
+                    </div>
+                    {/* {CustomEditor && <CustomEditor />} */}
                 </Grid>
             </Grid>
         </Container >

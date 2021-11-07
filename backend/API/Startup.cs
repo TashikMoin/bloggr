@@ -27,7 +27,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IStatisticsContract, StatisticsProvider>();
             services.AddTransient<IUserContract, UserProvider>();
             services.AddTransient<IBlogContract, BlogProvider>();
             string Private_Key = "aeggajkfhuqojnfjancoancmnealvneljvneajlnalbajcjakcnjavn";
@@ -48,8 +47,6 @@ namespace API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Private_Key))
                 };
             });
-
-            services.AddAutoMapper(typeof(StatisticsProfile));
             services.AddAutoMapper(typeof(UserProfile));
             services.AddAutoMapper(typeof(BlogProfile));
             services.AddDbContext<BloggrContext>(Options =>
