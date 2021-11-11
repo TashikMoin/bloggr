@@ -63,3 +63,12 @@
 .ce-toolbar__content :global(.ce-toolbar__content) {
     max-width: 100%;
 }
+
+.centerTextField {
+    margin-top: 30px;
+}
+
+.textFieldStyling {
+    width: 100%;
+    margin-top: 20px;
+}

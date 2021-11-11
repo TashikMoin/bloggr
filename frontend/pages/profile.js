@@ -53,7 +53,6 @@ const modalStyle = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    // border: '2px solid #000',
     boxShadow: '24px',
     p: 4,
     borderRadius: '20px',
@@ -68,7 +67,9 @@ export default function Profile() {
         <Container className={styles.container}>
             <Grid container direction="column" justifyContent="center" alignItems="stretch" spacing={2} className={styles.gridContainerStyle}>
                 <Grid item xs={4} className={styles.gridItem}>
-                    <div className={styles.profileLogo}></div>
+                    <div className={styles.profileLogo}>
+                        <span>JD</span>
+                    </div>
                 </Grid>
 
                 <Grid item xs={4} className={styles.gridItem}>

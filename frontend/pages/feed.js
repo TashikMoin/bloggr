@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import styles from "./styles/feed.module.css";
 
@@ -37,12 +38,16 @@ export default function Create() {
 
                 <Grid item xs={2}>
                     <Grid container direction="column" className={styles.buttonSection}>
-                        <div className={styles.addPostButton}>
-                            <span className={styles.plus}>+</span>
-                        </div>
-                        <div className={styles.profileButton}>
-                            <img src="/user.png" width="28px" height="28px" alt="" />
-                        </div>
+                        <Link href="/create">
+                            <div className={styles.addPostButton}>
+                                <span className={styles.plus}>+</span>
+                            </div>
+                        </Link>
+                        <Link href="/profile">
+                            <div className={styles.profileButton}>
+                                <img src="/user.png" width="28px" height="28px" alt="" />
+                            </div>
+                        </Link>
                     </Grid>
                 </Grid>
             </Grid>

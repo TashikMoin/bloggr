@@ -1,5 +1,5 @@
 import React from 'react';
-// import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import styles from "./styles/create.module.css";
 
@@ -26,9 +26,11 @@ export default function Create() {
                     justifyContent="space-between"
                     alignItems="stretch"
                 >
-                    <Grid item>
-                        <img src="/chevron-left.png" width="64px" height="64px" />
-                    </Grid>
+                    <Link href="/feed">
+                        <Grid item>
+                            <img src="/chevron-left.png" width="64px" height="64px" />
+                        </Grid>
+                    </Link>
 
                     <Grid item className={styles.postButton}>
                         <span>Post</span>

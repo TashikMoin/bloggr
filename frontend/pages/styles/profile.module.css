@@ -60,8 +60,23 @@
     /* Frame 9 */
     width: 320px;
     height: 320px;
-    background: #ABABAB;
+    background: #6750A4;
     border-radius: 400px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+div.profileLogo span {
+    font-family: Lato;
+    font-style: light;
+    /* font-weight: 900; */
+    font-size: 72px;
+    line-height: 58px;
+    display: flex;
+    align-items: center;
+    color: #fff;
 }
 
 .gridItem {
