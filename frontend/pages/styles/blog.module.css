@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400&display=swap');
+
+.likeStyle {
+    font-family: "Cairo", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    color: #000000;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.postButton {
+    /* Auto Layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 16px;
+    width: 325px;
+    height: 64px;
+    /* Primary/Brainstorming Purple */
+    background: #6979F8;
+    /* Shadows/Buttons/Button - 4dp - Shadow */
+    box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+    border-radius: 30px;
+}
+
+.postButton span {
+    /* ↪ Label */
+    width: 293px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    /* Primary/Brainstorming White */
+    color: #FFFFFF;
+    /* Inside Auto Layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+    margin: 0px 16px;
+}
+
+.codex-editor :global(.codex-editor) {
+    width: 100%;
+    height: 100%;
+}
+
+.ce-block__content :global(.ce-block__content),
+.ce-toolbar__content :global(.ce-toolbar__content) {
+    max-width: 100%;
+}
+
+.centerTextField {
+    margin-top: 30px;
+}
+
+.textFieldStyling {
+    width: 100%;
+    margin-top: 20px;
+}
