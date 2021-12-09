@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetUser")]
-        public ActionResult<User> GetUser(int Id)
+        public ActionResult<User> GetUser(int Id)   
         {
             var User = User_Provider.GetUser(Id);
             if (User != null)
@@ -49,11 +49,11 @@ namespace API.Controllers
 
 
         [AllowAnonymous]
-        [Route("~/api/register")]
+        [Route("~/api/register")] // localhost:port/api/register
         [HttpPost]
-        public ActionResult<ReadUser> Register(WriteUser _New_User)
+        public ActionResult<ReadUser> Register(WriteUser _New_User) 
         {
-            string Hashed_Password = BCrypt.Net.BCrypt.HashPassword(_New_User.Password);
+            string Hashed_Password = BCrypt.Net.BCrypt.HashPassword(_New_User.Password);  
             _New_User.Password = Hashed_Password;
             var New_User = Mapper.Map<User>(_New_User); // WriteUser dto --> User_Provider mapping
             User_Provider.CreateUser(New_User);
@@ -61,6 +61,7 @@ namespace API.Controllers
             var Read_User = Mapper.Map<ReadUser>(New_User);
             return CreatedAtRoute(nameof(GetUser), new { Id = New_User.User_Id }, Read_User);
         }
+
 
 
         [HttpPut("{id}")]

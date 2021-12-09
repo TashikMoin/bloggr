@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { styled } from "@material-ui/core/styles";
 import styles from "./styles/register.module.css";
 import Container from "@material-ui/core/Container";
@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -36,7 +37,37 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function Login() {
+export default function Register() {
+
+    const [Firstname, setFirstname] = useState("");
+    const [Lastname, setLastname] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Password, setPassword] = useState("");
+
+
+    const registerUser = (event) => 
+    {
+        event.preventDefault();
+        if (Firstname == "" || Lastname == "" || Email == "" || Password == "") 
+        {
+          alert(`Please fill all the required fields!`);
+        } 
+        else 
+        {
+            const formData = {
+            Firstname: Firstname,
+            Lastname: Lastname,
+            Email: Email,
+            Password: Password
+            };
+            axios.post('http://localhost:37606/api/register', formData)
+            .then(response => alert(response.data))
+            .catch(error => alert(error));
+        }
+
+    };
+
+
     return (
         <Grid container direction="row"
             justifyContent="center"
@@ -112,19 +143,35 @@ export default function Login() {
                                     alignItems="stretch"
                                 >
                                     <FormControl variant="standard">
+
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             First Name
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="John" id="bootstrap-input" className={styles.formStyle} />
+
+                                        <BootstrapInput 
+                                        onChange={(e) => setFirstname(e.target.value)}
+                                        value={Firstname} 
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} 
+                                        />
+
                                     </FormControl>
 
                                     <Grid item style={{ height: "10px" }}></Grid>
 
                                     <FormControl variant="standard">
+
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             Last Name
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="Doe" id="bootstrap-input" className={styles.formStyle} />
+
+                                        <BootstrapInput 
+                                        onChange={(e) => setLastname(e.target.value)}
+                                        value={Lastname}
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} 
+                                        />
+
                                     </FormControl>
 
                                     <Grid item style={{ height: "10px" }}></Grid>
@@ -133,7 +180,11 @@ export default function Login() {
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             Email
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="johndoe@website.com" id="bootstrap-input" className={styles.formStyle} />
+                                        <BootstrapInput 
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={Email}
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} />
                                     </FormControl>
 
                                     <Grid item style={{ height: "10px" }}></Grid>
@@ -142,7 +193,13 @@ export default function Login() {
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             Password
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="*********" id="bootstrap-input" className={styles.formStyle} />
+                                        <BootstrapInput 
+                                        type="password"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        value={Password} 
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} 
+                                        />
                                     </FormControl>
                                 </Grid>
                             </Grid>
@@ -157,7 +214,7 @@ export default function Login() {
                                     alignItems="stretch"
                                 >
                                     <Grid item xs={12}>
-                                        <div className={styles.loginButton}>
+                                        <div style={{ cursor: 'pointer'}} onClick={registerUser} className={styles.loginButton}>
                                             <span className={styles.loginButtonContent}>Sign Up</span>
                                         </div>
                                     </Grid>

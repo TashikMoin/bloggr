@@ -67,4 +67,3 @@ C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.AspNet
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\TashikMoin\Desktop\Bloggr\backend\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
-C:\Users\TashikMoin\Desktop\Bloggr\backend\API\obj\Debug\net5.0\API.csproj.CopyComplete
