@@ -9,12 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Router from "next/router";
 
-function parseJwt(token) {
-    if (!token) { return; }
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-}
+
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -63,7 +58,6 @@ export default function Login() {
             axios.post('http://localhost:37606/api/login', credentials)
             .then(response => {
             localStorage.setItem("Token", response.data.Token); 
-            // console.log(parseJwt(JSON.parse(localStorage.getItem("Token"))));
             Router.push('/feed')})
             .catch(error => alert(error));
             // localStorage.setItem('myData', data);

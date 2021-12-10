@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
-
+import axios from 'axios';
+import Router from "next/router";
 import styles from "./styles/create.module.css";
 
 import {
@@ -11,11 +12,31 @@ import {
 
 export default function Create() {
 
-    // let CustomEditor;
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [content, setContent] = useState();
 
-    // if (typeof window != "undefined") {
-    //     CustomEditor = dynamic(() => import('../components/CustomerEditor/CustomerEditor'));
-    // }
+    const post = (event) => 
+    {
+        event.preventDefault();
+        if (title == "" || description == "" || content == "") 
+        {
+          alert(`Please fill all the required fields!`);
+        } 
+        else 
+        {
+            const formData = {
+            Title: title,
+            Description: description,
+            Content: content
+            };
+            const Token = localStorage.getItem('Token');
+            axios.post('http://localhost:37606/api/newblog', formData, { headers: {"Authorization" : `Bearer ${Token}`} })
+            .then(response => {alert(`Blog Created!`); Router.push('/feed')} )
+            .catch(error => alert(error));
+        }
+
+    };
 
     return (
         <Container className={styles.container}>
@@ -32,7 +53,7 @@ export default function Create() {
                         </Grid>
                     </Link>
 
-                    <Grid item className={styles.postButton}>
+                    <Grid onClick={post} style={{cursor: 'pointer'}} item className={styles.postButton}>
                         <span>Post</span>
                     </Grid>
                 </Grid>
@@ -43,9 +64,10 @@ export default function Create() {
                         <TextField
                             id="standard-multiline-static"
                             label="Title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             multiline
                             rows={4}
-                            defaultValue="Lorem Ipsum"
                             variant="standard"
                             className={styles.textFieldStyling}
                         />
@@ -55,8 +77,9 @@ export default function Create() {
                             id="standard-multiline-static"
                             label="Description"
                             multiline
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                             rows={4}
-                            defaultValue="Lorem Ipsum"
                             variant="standard"
                             className={styles.textFieldStyling}
                         />
@@ -66,13 +89,13 @@ export default function Create() {
                             id="standard-multiline-static"
                             label="Content"
                             multiline
-                            rows={4}
-                            defaultValue="Lorem Ipsum"
+                            onChange={(e) => setContent(e.target.value)}
+                            value={content}
+                            rows={35}
                             variant="standard"
                             className={styles.textFieldStyling}
                         />
                     </div>
-                    {/* {CustomEditor && <CustomEditor />} */}
                 </Grid>
             </Grid>
         </Container >

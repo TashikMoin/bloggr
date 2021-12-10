@@ -16,16 +16,16 @@ export default function Create() {
     useEffect(() => {
         const fetchData = async () => { 
             const Token = localStorage.getItem('Token');
-            console.log(`Token here ---> ${Token}`);
             await axios.get(`http://localhost:37606/api/blogs`, { headers: {"Authorization" : `Bearer ${Token}`} })
-            .then((response) => {
-                    setData([...response.data]);
-                    console.log(data);
-            })
+            .then((response) => {setData([...response.data]);})
             .catch((error) => console.log(error));
         }  
         fetchData();
     }, []);
+
+    const logout = () => {
+        localStorage.removeItem('Token');
+    }
 
 
     return (
@@ -37,7 +37,7 @@ export default function Create() {
 
                     {data.map((i, index) => {
                         return (
-                            <Grid key={index} item>
+                            <Grid style={{margin: '30px'}} key={index} item>
                                 <Card 
                                 title={i.title} 
                                 description={i.description}
@@ -65,6 +65,13 @@ export default function Create() {
                             <a>
                                 <div className={styles.profileButton}>
                                     <img src="/user.png" width="28px" height="28px" alt="" />
+                                </div>
+                            </a>
+                        </Link>
+                        <Link href="/login">
+                            <a>
+                                <div onClick={logout} style={{ color: '#ffffff'}} className={styles.addPostButton}>
+                                    Logout
                                 </div>
                             </a>
                         </Link>
