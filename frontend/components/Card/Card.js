@@ -4,17 +4,13 @@ import styles from './card.module.css';
 
 import { Grid } from '@material-ui/core';
 
-export default function CustomCard({ text, date, likes }) {
+export default function CustomCard({ title, description, content }) {
     return (
         <Grid container direction="row" justifyContent="space-between" alignItems="stretch" className={styles.cardBox}>
-            {/* <Grid item xs={1} className={styles.leftStyling}>
-                <img src="/heart.png" width="28px" height="28px" alt="heart" />
-                <p className={styles.likeStyle}>{likes}</p>
-            </Grid> */}
-
             <Grid item xs={11} className={styles.rightStyling}>
-                <p className={styles.dateStyle}>{date}</p>
-                <p className={styles.contentStyle}>{text}</p>
+                <h1> {title} </h1>
+                <p className={styles.dateStyle}>{description}</p>
+                <p className={styles.contentStyle}>{content}</p>
             </Grid>
         </Grid>
     )

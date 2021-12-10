@@ -1,13 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
-
+import axios from "axios";
 import styles from "./styles/feed.module.css";
 
 import { Container, Grid } from "@material-ui/core";
 
 import Card from "../components/Card/Card";
 
+
+
+
 export default function Create() {
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => { 
+            const Token = localStorage.getItem('Token');
+            console.log(`Token here ---> ${Token}`);
+            await axios.get(`http://localhost:37606/api/blogs`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            .then((response) => {
+                    setData([...response.data]);
+                    console.log(data);
+            })
+            .catch((error) => console.log(error));
+        }  
+        fetchData();
+    }, []);
+
 
     return (
         <Container className={styles.container}>
@@ -15,38 +34,39 @@ export default function Create() {
                 alignItems="stretch">
                 <Grid item xs={10}>
                     <Grid container direction="column">
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
-                        <Grid item>
-                            <Card text="Hello, World!" date="1st January, 2020" likes="5" />
-                        </Grid>
+
+                    {data.map((i, index) => {
+                        return (
+                            <Grid key={index} item>
+                                <Card 
+                                title={i.title} 
+                                description={i.description}
+                                content={i.content}
+                                />
+                            </Grid>
+                        );
+                    })}
+                            
+
+
                     </Grid>
                 </Grid>
 
                 <Grid item xs={2}>
                     <Grid container direction="column" className={styles.buttonSection}>
                         <Link href="/create">
-                            <div className={styles.addPostButton}>
-                                <span className={styles.plus}>+</span>
-                            </div>
+                            <a>
+                                <div className={styles.addPostButton}>
+                                    <span className={styles.plus}>+</span>
+                                </div>
+                            </a>
                         </Link>
                         <Link href="/profile">
-                            <div className={styles.profileButton}>
-                                <img src="/user.png" width="28px" height="28px" alt="" />
-                            </div>
+                            <a>
+                                <div className={styles.profileButton}>
+                                    <img src="/user.png" width="28px" height="28px" alt="" />
+                                </div>
+                            </a>
                         </Link>
                     </Grid>
                 </Grid>

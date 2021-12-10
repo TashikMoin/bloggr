@@ -7,6 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import Router from "next/router";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -61,7 +62,7 @@ export default function Register() {
             Password: Password
             };
             axios.post('http://localhost:37606/api/register', formData)
-            .then(response => alert(response.data))
+            .then(response => {alert(`User Registered Successfully!`); Router.push('/login')} )
             .catch(error => alert(error));
         }
 

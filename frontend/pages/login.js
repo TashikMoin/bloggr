@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { styled } from "@material-ui/core/styles";
 import styles from "./styles/login.module.css";
 import Container from "@material-ui/core/Container";
@@ -6,6 +6,15 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import Router from "next/router";
+
+function parseJwt(token) {
+    if (!token) { return; }
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+}
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -37,7 +46,38 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Login() {
+
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+
+    const loginUser = (event) => {
+        event.preventDefault();
+        if( (Email == '') || (Password == '') ){
+            alert(`Please fill all the required fields!`);
+        }
+        else{
+            const credentials = { 
+                Email: Email,
+                Password: Password
+            };
+            axios.post('http://localhost:37606/api/login', credentials)
+            .then(response => {
+            localStorage.setItem("Token", response.data.Token); 
+            // console.log(parseJwt(JSON.parse(localStorage.getItem("Token"))));
+            Router.push('/feed')})
+            .catch(error => alert(error));
+            // localStorage.setItem('myData', data);
+            // // getter
+            // localStorage.getItem('myData');
+            // // remove
+            // localStorage.removeItem('myData');
+            // // remove all
+            // localStorage.clear();
+        }
+    };
+
     return (
+
         <Grid container direction="row"
             justifyContent="center"
             alignItems="stretch" spacing={0}
@@ -103,7 +143,11 @@ export default function Login() {
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             Email
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="mail@website.com" id="bootstrap-input" className={styles.formStyle} />
+                                        <BootstrapInput 
+                                        value={Email} 
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} />
                                     </FormControl>
 
                                     <Grid item style={{ height: "30px" }}></Grid>
@@ -112,7 +156,12 @@ export default function Login() {
                                         <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                             Password
                                         </InputLabel>
-                                        <BootstrapInput defaultValue="*********" id="bootstrap-input" className={styles.formStyle} />
+                                        <BootstrapInput
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        value={Password} 
+                                        type="password"
+                                        id="bootstrap-input" 
+                                        className={styles.formStyle} />
                                     </FormControl>
                                 </Grid>
                             </Grid>
@@ -127,7 +176,7 @@ export default function Login() {
                                     alignItems="stretch"
                                 >
                                     <Grid item xs={12}>
-                                        <div className={styles.loginButton}>
+                                        <div onClick={loginUser} style={{ cursor: 'pointer'}} className={styles.loginButton}>
                                             <span className={styles.loginButtonContent}>Sign In</span>
                                         </div>
                                     </Grid>
