@@ -13,9 +13,9 @@ import {
 
 export default function Update() {
 
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
-    const [content, setContent] = useState();
+    const [title, setTitle] = useState(null);
+    const [description, setDescription] = useState(null);
+    const [content, setContent] = useState(null);
     const router = useRouter();
     const { id } = router.query;
 
@@ -58,6 +58,14 @@ export default function Update() {
     };
 
     return (
+        <>
+        { (title == null || description == null || content == null) && (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width:'98vw'}}>
+                Resource Not Available!
+            </div>
+        )}
+
+        { (title != null && description != null && content != null) && (
         <Container className={styles.container}>
             <Grid container direction="row" justifyContent="flex-start" alignItems="stretch">
                 <Grid
@@ -114,6 +122,8 @@ export default function Update() {
                     </div>
                 </Grid>
             </Grid>
-        </Container >
+        </Container >)
+        }
+    </>
     );
 };
