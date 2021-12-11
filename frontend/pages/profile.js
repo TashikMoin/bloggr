@@ -68,6 +68,7 @@ export default function Profile() {
     const [lastname, setLastname] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
+    const [avatar, setAvatar] = useState();
 
     const updateUser = (event) => {
         event.preventDefault();
@@ -103,7 +104,7 @@ export default function Profile() {
             const user = jwt(Token);
             console.log(user);
             await axios.get(`http://localhost:37606/api/users/${user.Id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
-            .then((response) => { setEmail(response.data.email); setFirstname(response.data.firstname); setLastname(response.data.lastname);})
+            .then((response) => { setAvatar(`${response.data.firstname.charAt(0).toUpperCase()}${response.data.lastname.charAt(0).toUpperCase()}`); setEmail(response.data.email); setFirstname(response.data.firstname); setLastname(response.data.lastname);})
             .catch((error) => console.log(error));
         }  
         fetchData();
@@ -114,7 +115,7 @@ export default function Profile() {
             <Grid container direction="column" justifyContent="center" alignItems="stretch" spacing={2} className={styles.gridContainerStyle}>
                 <Grid item xs={4} className={styles.gridItem}>
                     <div style={{color: '#ffffff', fontSize: '3rem'}} className={styles.profileLogo}>
-                        JD
+                        {avatar}
                     </div>
                 </Grid>
 
