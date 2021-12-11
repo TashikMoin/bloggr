@@ -43,15 +43,23 @@ export default function Create() {
                     <Grid item xs={10}>
                         <Grid container direction="column">
 
+                        <div style={{display: 'flex', justifyContent: 'center', color: 'grey'}}>
+                            <h1> Your Blogs </h1>
+                        </div>
+
                         {data.map((i, index) => {
                             return (
-                                <Grid style={{margin: '30px'}} key={index} item>
-                                    <Card 
-                                    title={i.title} 
-                                    description={i.description}
-                                    content={i.content}
-                                    />
-                                </Grid>
+                                <Link key={index} href={`/blog/${i.blog_Id}`}>
+                                    <a>
+                                        <Grid style={{margin: '30px'}} item>
+                                            <Card 
+                                            title={i.title} 
+                                            description={i.description}
+                                            content={i.content}
+                                            />
+                                        </Grid>
+                                    </a>
+                                </Link>
                             );
                         })}
                                 
