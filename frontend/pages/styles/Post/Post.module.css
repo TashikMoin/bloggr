@@ -7,7 +7,6 @@
 .postcontainer {
     width: 55%;
     height: 100vh;
-    /* background-color: black; */
 }
 
 .postheader {
@@ -44,7 +43,6 @@
     font-size: 1rem;
     font-weight: 400;
     color: #5f6368;
-    margin-top: 7px;
 }
 
 
@@ -52,14 +50,19 @@
 
 
 
-.postcontent {
-    /* background-color: blueviolet; */
+.postcontent, .description {
     width: 100%;
-    padding: 3% 0;
-    border-bottom: 3px solid #e8eaed;
+    padding: 0;
 }
 
-.content {
+
+
+
+.description {
+    padding: 0;
+}
+
+.content, .descriptionContent {
     word-wrap: break-word;
     text-align: justify;
     letter-spacing: 0.01428571em;
@@ -69,8 +72,32 @@
     line-height: 1.25rem;
     color: #3c4043;
     padding: 5px;
+    border-bottom: 3px solid #e8eaed;
 }
 
+
+.buttonContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+.lbtn, .rbtn{
+    margin: 10px;
+    height: 50px;
+    width: 100px;
+    background-color: #c26401;
+    cursor: pointer;
+}
+
+.lbtn:hover, .rbtn:hover {
+    background-color: chocolate;
+}
+
+.rbtn{
+    margin-left: 100px;
+}
 
 
 
