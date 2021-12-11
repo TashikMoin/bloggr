@@ -67,6 +67,8 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateUser(int Id, UpdateUser UpdatedUser)
         {
+            string Hashed_Password = BCrypt.Net.BCrypt.HashPassword(UpdatedUser.Password);
+            UpdatedUser.Password = Hashed_Password;
             var JWT_Claim_User_Id = User.FindFirst("Id").Value;
             if (User_Provider.isLoggedIn(Id, Int32.Parse(JWT_Claim_User_Id)))
             {
@@ -86,7 +88,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult DeleteEmployee(int Id)
+        public ActionResult DeleteUser(int Id)
         {
             var JWT_Claim_User_Id = User.FindFirst("Id").Value;
             if (User_Provider.isLoggedIn(Id, Int32.Parse(JWT_Claim_User_Id)))

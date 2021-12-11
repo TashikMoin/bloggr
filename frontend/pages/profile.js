@@ -1,8 +1,9 @@
-import React from 'react';
-
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import styles from './styles/profile.module.css';
-
+import jwt from 'jwt-decode'
 import { styled } from "@material-ui/core/styles";
+import Router from "next/router";
 
 import {
     Container,
@@ -62,13 +63,58 @@ export default function Profile() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [email, setEmail] = useState();
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+
+    const updateUser = (event) => {
+        event.preventDefault();
+        if (firstname == "" || lastname == "" || password == "" || confirmPassword == "") 
+        {
+          alert(`Please fill all the required fields!`);
+        } 
+        else 
+        {
+            if(password == confirmPassword)
+            {
+                const formData = {
+                    Firstname: firstname,
+                    Lastname: lastname,
+                    Password: password
+                };
+                const Token = localStorage.getItem('Token');
+                const user = jwt(Token);
+                axios.put(`http://localhost:37606/api/users/${user.Id}`, formData, { headers: {"Authorization" : `Bearer ${Token}`} })
+                .then(response => {alert(`Profile Updated Successfully!`); Router.push('/feed')} )
+                .catch(error => alert(error));
+            }
+            else{
+                alert(`Password does not matches!`);
+            }
+
+        }
+    }
+
+    useEffect(() => {
+        const fetchData = async () => { 
+            const Token = localStorage.getItem('Token');
+            const user = jwt(Token);
+            console.log(user);
+            await axios.get(`http://localhost:37606/api/users/${user.Id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            .then((response) => { setEmail(response.data.email); setFirstname(response.data.firstname); setLastname(response.data.lastname);})
+            .catch((error) => console.log(error));
+        }  
+        fetchData();
+    }, []);
 
     return (
         <Container className={styles.container}>
             <Grid container direction="column" justifyContent="center" alignItems="stretch" spacing={2} className={styles.gridContainerStyle}>
                 <Grid item xs={4} className={styles.gridItem}>
-                    <div className={styles.profileLogo}>
-                        <span>JD</span>
+                    <div style={{color: '#ffffff', fontSize: '3rem'}} className={styles.profileLogo}>
+                        JD
                     </div>
                 </Grid>
 
@@ -83,26 +129,73 @@ export default function Profile() {
                             <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                 Email
                             </InputLabel>
-                            <BootstrapInput defaultValue="johndoe@website.com" id="bootstrap-input" className={styles.formStyle} />
+                            <BootstrapInput style={{color: 'grey'}} readOnly value={email} id="bootstrap-input" className={styles.formStyle} />
                         </FormControl>
 
-                        <Grid item style={{ height: "30px" }}></Grid>
+                        <Grid item style={{ height: "5px" }}></Grid>
 
                         <FormControl variant="standard">
                             <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                 First Name
                             </InputLabel>
-                            <BootstrapInput defaultValue="john" id="bootstrap-input" className={styles.formStyle} />
+
+                            <BootstrapInput 
+                            onChange={(e) => setFirstname(e.target.value)}
+                            value={firstname} 
+                            id="bootstrap-input" 
+                            className={styles.formStyle} 
+                            />
+
                         </FormControl>
 
-                        <Grid item style={{ height: "30px" }}></Grid>
+                        <Grid item style={{ height: "5px" }}></Grid>
 
                         <FormControl variant="standard">
                             <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
                                 Last Name
                             </InputLabel>
-                            <BootstrapInput defaultValue="doe" id="bootstrap-input" className={styles.formStyle} />
+
+                            <BootstrapInput 
+                            onChange={(e) => setLastname(e.target.value)}
+                            value={lastname} 
+                            id="bootstrap-input" 
+                            className={styles.formStyle} 
+                            />
                         </FormControl>
+
+                        <Grid item style={{ height: "5px" }}></Grid>
+
+                        <FormControl variant="standard">
+                            <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
+                                Password
+                            </InputLabel>
+
+                            <BootstrapInput 
+                            type="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password} 
+                            id="bootstrap-input" 
+                            className={styles.formStyle} 
+                            />
+                        </FormControl>    
+
+                        <Grid item style={{ height: "5px" }}></Grid>
+
+                        <FormControl variant="standard">
+                            <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
+                                Confirm password
+                            </InputLabel>
+
+                            <BootstrapInput 
+                            type="password"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            value={confirmPassword} 
+                            id="bootstrap-input" 
+                            className={styles.formStyle} 
+                            />
+                        </FormControl>              
+
+                        
                     </Grid>
                 </Grid>
 
@@ -114,70 +207,11 @@ export default function Profile() {
                         spacing={1}
                     >
                         <Grid item xs={6}>
-                            <Button className={styles.loginButton}>
-                                <span className={styles.loginButtonContent}>Save Changes</span>
+                            <Button onClick={updateUser} className={styles.loginButton}>
+                                <span className={styles.loginButtonContent}>Update Profile</span>
                             </Button>
                         </Grid>
 
-                        <Grid item xs={6}>
-                            <Button onClick={handleOpen} className={styles.changePasswordButton}>
-                                <span className={styles.changePasswordButtonContent}>Change Password</span>
-                            </Button>
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                            >
-                                <Box sx={modalStyle}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        Change Password
-                                    </Typography>
-                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                        <Grid
-                                            container
-                                            direction="column"
-                                            justifyContent="flex-start"
-                                            alignItems="stretch"
-                                        >
-                                            <FormControl variant="standard">
-                                                <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
-                                                    New Password
-                                                </InputLabel>
-                                                <BootstrapInput defaultValue="12345" id="bootstrap-input" className={styles.formStyle} />
-                                            </FormControl>
-
-                                            <Grid item style={{ height: "30px" }}></Grid>
-
-                                            <FormControl variant="standard">
-                                                <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
-                                                    Confirm Password
-                                                </InputLabel>
-                                                <BootstrapInput defaultValue="*****" id="bootstrap-input" className={styles.formStyle} />
-                                            </FormControl>
-                                        </Grid>
-                                        <Grid container
-                                            direction="row"
-                                            justifyContent="center"
-                                            alignItems="stretch"
-                                            spacing={1}
-                                            style={{ padding: "10px" }}
-                                        >
-                                            <Grid item xs={6}>
-                                                <Button className={styles.loginButton}>
-                                                    <span className={styles.loginButtonContent}>Save Changes</span>
-                                                </Button>
-                                            </Grid>
-                                            <Grid item xs={6}>
-                                                <Button onClick={handleClose} className={styles.changePasswordButton}>
-                                                    <span className={styles.changePasswordButtonContent}>Cancel</span>
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </Typography>
-                                </Box>
-                            </Modal>
-                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
