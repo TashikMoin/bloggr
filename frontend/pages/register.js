@@ -8,6 +8,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios"; 
 import Router from "next/router";
+import Link from 'next/link';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
@@ -235,7 +236,7 @@ export default function Register() {
 
                                 {/* End Remarks */}
                                 <Grid item style={{ paddingTop: "40px" }}>
-                                    <p className={styles.registerInfo}>Not yet registered? &nbsp;<span className={styles.linkToRegister}> Create an account</span></p>
+                                <p className={styles.registerInfo}>Already have an account? &nbsp; <Link href="/login"><a><span className={styles.linkToRegister}> Sign in</span> </a></Link></p>
 
                                     <p className={styles.trademark}>@2021 Bloggr all rights reserved</p>
                                 </Grid>

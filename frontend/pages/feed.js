@@ -13,10 +13,11 @@ import Card from "../components/Card/Card";
 export default function Create() {
 
     const [data, setData] = useState([]);
+    const [Token, setToken] = useState(null);
     useEffect(() => {
         const fetchData = async () => { 
-            const Token = localStorage.getItem('Token');
-            await axios.get(`http://localhost:37606/api/blogs`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            setToken(localStorage.getItem('Token'));
+            await axios.get(`http://localhost:37606/api/blogs`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
             .then((response) => {setData([...response.data]);})
             .catch((error) => console.log(error));
         }  
@@ -30,13 +31,13 @@ export default function Create() {
 
     return (
         <>
-        { (data.length == 0) &&
+        { Token == null &&
             <div style={{display: 'flex', height: '100vh', width: '98vw', justifyContent: 'center', alignItems: 'center'}}>
                 Unauthorized Access !
             </div>
         }
 
-        {(data.length != 0) && (
+        { Token != null && (
             <Container className={styles.container}>
                 <Grid container direction="row" justifyContent="space-between"
                     alignItems="stretch">
