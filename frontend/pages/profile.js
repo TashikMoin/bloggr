@@ -168,7 +168,7 @@ export default function Profile() {
 
                         <FormControl variant="standard">
                             <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
-                                Password
+                                New Password
                             </InputLabel>
 
                             <BootstrapInput 
@@ -184,7 +184,7 @@ export default function Profile() {
 
                         <FormControl variant="standard">
                             <InputLabel className={styles.labelStyle} shrink htmlFor="bootstrap-input">
-                                Confirm password
+                                Confirm New password
                             </InputLabel>
 
                             <BootstrapInput 

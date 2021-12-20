@@ -13,6 +13,7 @@ import Card from "../components/Card/Card";
 export default function Create() {
 
     const [data, setData] = useState([]);
+    const [searchString, setSearchString] = useState('');
     const [Token, setToken] = useState(null);
     useEffect(() => {
         const fetchData = async () => { 
@@ -23,6 +24,12 @@ export default function Create() {
         }  
         fetchData();
     }, []);
+
+    const searchBlogs = async () => {
+        await axios.get(`http://localhost:37606/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
+        .then((response) => {setData([...response.data]);})
+        .catch((error) => console.log(error));
+    }
 
     const logout = () => {
         localStorage.removeItem('Token');
@@ -47,6 +54,23 @@ export default function Create() {
                         <div style={{display: 'flex', justifyContent: 'center', color: 'grey'}}>
                             <h1> Your Blogs </h1>
                         </div>
+
+                        <div style={{ display: 'flex', marginTop: '3vh'}}>
+                            <input 
+                            onChange={(e)=> setSearchString(e.target.value)}
+                            value={searchString}
+                            placeholder='Search a blog by title.'
+                            style={{
+                            height: '40px',
+                            width: '60vw', 
+                            padding: '10px',
+                            outline: 'none'}} />
+                            <button 
+                            onClick={searchBlogs}
+                            style={{ cursor: 'pointer', color: '#ffffff', marginLeft: '10px', height: '40px', width: '100px', backgroundColor: '#3627E4'}}> Search</button>
+                        </div>
+
+
 
                         {data.map((i, index) => {
                             return (

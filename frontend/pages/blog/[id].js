@@ -11,6 +11,7 @@ const Blog = () => {
     const router = useRouter();
     const { id } = router.query;
     const [user, setUser] = useState({});
+    const [blogUserId, setBlogUserId] = useState(null);
 
     const [data, setData] = useState(null);
 
@@ -32,7 +33,7 @@ const Blog = () => {
         const fetchData = async () => { 
             const Token = localStorage.getItem('Token');
             await axios.get(`http://localhost:37606/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
-            .then((response) => {setData(response.data);})
+            .then((response) => {setData(response.data); setBlogUserId(response.data.user_Id);})
             .catch((error) => console.log(error));
         }  
         fetchData();
@@ -58,7 +59,7 @@ const Blog = () => {
 
                     <div className={PostStyling.headingcontainer}>
                         <h1 className={PostStyling.heading}> {data.title} </h1> 
-                        <div className={PostStyling.teachername}> <b> Author:</b> {user.Name} </div>
+                        <div className={PostStyling.teachername}> <b> Author Id:</b> {blogUserId} </div>
                     </div> 
 
                 </div>
@@ -77,14 +78,14 @@ const Blog = () => {
                     </p>
                 </div>
 
-                <div className={PostStyling.buttonContainer}>
+                {blogUserId == user.Id && (<div className={PostStyling.buttonContainer}>
                     <Link href={`/update/${id}`}>
                         <a>
                             <button className={PostStyling.lbtn}> Update </button> 
                         </a>
                     </Link> 
                     <button onClick={deleteBlog} className={PostStyling.rbtn}> Delete </button>
-                </div>
+                </div>)}
         
             </div>
         </div>

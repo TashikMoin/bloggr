@@ -4,6 +4,7 @@ import axios from 'axios';
 import Router from "next/router";
 import { useRouter } from 'next/router';
 import styles from "../styles/create.module.css";
+import jwt from 'jwt-decode'
 
 import {
     Container,
@@ -16,17 +17,21 @@ export default function Update() {
     const [title, setTitle] = useState(null);
     const [description, setDescription] = useState(null);
     const [content, setContent] = useState(null);
+    const [blogUserId, setBlogUserId] = useState(null);
     const router = useRouter();
     const { id } = router.query;
+    const [user, setUser] = useState({});
 
 
 
     useEffect(() => {
         if(!id) { return; }
+        const Token = localStorage.getItem('Token');
+        setUser(jwt(Token));
         const fetchData = async () => { 
             const Token = localStorage.getItem('Token');
             await axios.get(`http://localhost:37606/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
-            .then((response) => {setTitle(response.data.title); setDescription(response.data.description); setContent(response.data.content);})
+            .then((response) => {setTitle(response.data.title); setBlogUserId(response.data.user_Id); setDescription(response.data.description); setContent(response.data.content);})
             .catch((error) => console.log(error));
         }  
         fetchData();
@@ -59,13 +64,13 @@ export default function Update() {
 
     return (
         <>
-        { (title == null || description == null || content == null) && (
+        { (blogUserId != user.Id || title == null || description == null || content == null) && (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width:'98vw'}}>
                 Resource Not Available!
             </div>
         )}
-
-        { (title != null && description != null && content != null) && (
+        {/* title != null && description != null && content != null */}
+        { blogUserId == user.Id && (
         <Container className={styles.container}>
             <Grid container direction="row" justifyContent="flex-start" alignItems="stretch">
                 <Grid
