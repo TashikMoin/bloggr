@@ -22,8 +22,10 @@ export default function Create() {
             .then((response) => {setData([...response.data]);})
             .catch((error) => console.log(error));
         }  
-        fetchData();
-    }, []);
+        if(searchString == ''){
+            fetchData();
+        }
+    }, [data, searchString]);
 
     const searchBlogs = async () => {
         await axios.get(`http://localhost:37606/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
