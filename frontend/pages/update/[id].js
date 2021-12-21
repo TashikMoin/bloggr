@@ -30,7 +30,7 @@ export default function Update() {
         setUser(jwt(Token));
         const fetchData = async () => { 
             const Token = localStorage.getItem('Token');
-            await axios.get(`http://bloggrapi.azurewebsites.net/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            await axios.get(`https://bloggrapi.azurewebsites.net/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then((response) => {setTitle(response.data.title); setBlogUserId(response.data.user_Id); setDescription(response.data.description); setContent(response.data.content);})
             .catch((error) => console.log(error));
         }  
@@ -55,7 +55,7 @@ export default function Update() {
             Content: content
             };
             const Token = localStorage.getItem('Token');
-            axios.put(`http://bloggrapi.azurewebsites.net/api/blogs/${id}`, formData, { headers: {"Authorization" : `Bearer ${Token}`} })
+            axios.put(`https://bloggrapi.azurewebsites.net/api/blogs/${id}`, formData, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then(response => {alert(`Blog Updated!`); Router.push('/feed')} )
             .catch(error => alert(error));
         }

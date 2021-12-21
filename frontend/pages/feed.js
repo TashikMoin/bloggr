@@ -17,7 +17,7 @@ export default function Create() {
     useEffect(() => {
         const fetchData = async () => { 
             setToken(localStorage.getItem('Token'));
-            await axios.get(`http://bloggrapi.azurewebsites.net/api/blogs`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
+            await axios.get(`https://bloggrapi.azurewebsites.net/api/blogs`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
             .then((response) => {setData([...response.data]);})
             .catch((error) => console.log(error));
         }  
@@ -27,7 +27,7 @@ export default function Create() {
     }, [data, searchString]);
 
     const searchBlogs = async () => {
-        await axios.get(`http://bloggrapi.azurewebsites.net/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
+        await axios.get(`https://bloggrapi.azurewebsites.net/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
         .then((response) => {setData([...response.data]);})
         .catch((error) => console.log(error));
     }

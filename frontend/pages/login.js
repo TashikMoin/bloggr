@@ -67,7 +67,7 @@ export default function Login() {
                 Email: Email,
                 Password: Password
             };
-            axios.post('http://bloggrapi.azurewebsites.net/api/login', credentials)
+            axios.post('https://bloggrapi.azurewebsites.net/api/login', credentials)
             .then(response => {
             localStorage.setItem("Token", response.data.Token); 
             Router.push('/feed')})
