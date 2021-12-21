@@ -18,7 +18,7 @@ const Blog = () => {
     const deleteBlog = () => {
         const deleteBlogAsync = async () => { 
             const Token = localStorage.getItem('Token');
-            await axios.delete(`http://localhost:37606/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            await axios.delete(`http://bloggrapi.azurewebsites.net/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then((response) => { alert(`Blog Deleted Successfully`); })
             .catch((error) => console.log(error));
         }  
@@ -32,7 +32,7 @@ const Blog = () => {
         setUser(jwt(Token));
         const fetchData = async () => { 
             const Token = localStorage.getItem('Token');
-            await axios.get(`http://localhost:37606/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            await axios.get(`http://bloggrapi.azurewebsites.net/api/blogs/${id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then((response) => {setData(response.data); setBlogUserId(response.data.user_Id);})
             .catch((error) => console.log(error));
         }  

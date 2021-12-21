@@ -103,7 +103,7 @@ export default function Profile() {
             const Token = localStorage.getItem('Token');
             const user = jwt(Token);
             console.log(user);
-            await axios.get(`http://localhost:37606/api/users/${user.Id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
+            await axios.get(`http://bloggrapi.azurewebsites.net/api/users/${user.Id}`, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then((response) => { setAvatar(`${response.data.firstname.charAt(0).toUpperCase()}${response.data.lastname.charAt(0).toUpperCase()}`); setEmail(response.data.email); setFirstname(response.data.firstname); setLastname(response.data.lastname);})
             .catch((error) => console.log(error));
         }  

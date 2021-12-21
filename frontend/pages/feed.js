@@ -4,7 +4,6 @@ import axios from "axios";
 import styles from "./styles/feed.module.css";
 import Router from "next/router";
 import { Container, Grid } from "@material-ui/core";
-
 import Card from "../components/Card/Card";
 
 
@@ -18,7 +17,7 @@ export default function Create() {
     useEffect(() => {
         const fetchData = async () => { 
             setToken(localStorage.getItem('Token'));
-            await axios.get(`http://localhost:37606/api/blogs`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
+            await axios.get(`http://bloggrapi.azurewebsites.net/api/blogs`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
             .then((response) => {setData([...response.data]);})
             .catch((error) => console.log(error));
         }  
@@ -28,7 +27,7 @@ export default function Create() {
     }, [data, searchString]);
 
     const searchBlogs = async () => {
-        await axios.get(`http://localhost:37606/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
+        await axios.get(`http://bloggrapi.azurewebsites.net/api/SearchBlogs/${searchString}`, { headers: {"Authorization" : `Bearer ${localStorage.getItem('Token')}`} })
         .then((response) => {setData([...response.data]);})
         .catch((error) => console.log(error));
     }

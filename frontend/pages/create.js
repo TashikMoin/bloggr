@@ -31,7 +31,7 @@ export default function Create() {
             Content: content
             };
             const Token = localStorage.getItem('Token');
-            axios.post('http://localhost:37606/api/newblog', formData, { headers: {"Authorization" : `Bearer ${Token}`} })
+            axios.post('http://bloggrapi.azurewebsites.net/api/newblog', formData, { headers: {"Authorization" : `Bearer ${Token}`} })
             .then(response => {alert(`Blog Created!`); Router.push('/feed')} )
             .catch(error => alert(error));
         }
