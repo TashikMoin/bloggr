@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styles from './styles/profile.module.css';
 import jwt from 'jwt-decode'
-import { styled } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 import Router from "next/router";
 
 import {
@@ -11,12 +11,8 @@ import {
     FormControl,
     InputLabel,
     InputBase,
-    Typography,
-    Box,
-    Modal,
-    Button,
-
-} from "@material-ui/core";
+    Button
+} from "@mui/material";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
     'label + &': {

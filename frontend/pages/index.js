@@ -1,9 +1,8 @@
 import React from "react";
 
-import Grid from "@material-ui/core/Grid";
+import { Grid, Button } from "@mui/material";
 
 import styles from "./styles/index.module.css";
-import { Button } from "@material-ui/core";
 
 export default function Index() {
   return (

@@ -8,7 +8,7 @@ import {
     Container,
     Grid,
     TextField
-} from "@material-ui/core";
+} from "@mui/material";
 
 export default function Create() {
 
