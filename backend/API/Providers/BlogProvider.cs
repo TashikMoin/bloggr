@@ -43,12 +43,16 @@ namespace API.Providers
             return Query.Blog.ToList().Where(x => x.User_Id == User_Id);
         }
 
+        public IEnumerable<Blog> Search(string search)
+        {
+            return Query.Blog.ToList().Where(x => x.Title.Contains(search));
+        }
         public bool SaveChanges()
         {
             return (Query.SaveChanges() >= 0);
         }
 
-        public void UpdateBlog(Blog Blog, UpdateBlog UpdatedBlog) 
+        public void UpdateBlog(Blog Blog, UpdateBlog UpdatedBlog)
         {
             Blog.Title = UpdatedBlog.Title;
             Blog.Description = UpdatedBlog.Description;

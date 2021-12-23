@@ -7,6 +7,8 @@ namespace API.Contracts
     public interface IBlogContract
     {
         IEnumerable<Blog> GetBlogs(int User_Id);
+
+        IEnumerable<Blog> Search(string search);
         Blog GetBlog(int Id);
         void CreateBlog(Blog Blog);
         void UpdateBlog(Blog Blog, UpdateBlog BlogUpdate);
