@@ -83,7 +83,7 @@ export default function Profile() {
                 };
                 const Token = localStorage.getItem('Token');
                 const user = jwt(Token);
-                axios.put(`https://localhost:37606/api/users/${user.Id}`, formData, { headers: {"Authorization" : `Bearer ${Token}`} })
+                axios.put(`https://bloggrapi.azurewebsites.net/api/users/${user.Id}`, formData, { headers: {"Authorization" : `Bearer ${Token}`} })
                 .then(response => {alert(`Profile Updated Successfully!`); Router.push('/feed')} )
                 .catch(error => alert(error));
             }

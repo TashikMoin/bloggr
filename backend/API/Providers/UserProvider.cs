@@ -64,7 +64,7 @@ namespace API.Providers
 
         public bool isLoggedIn(int User_Id, int JWT_Claim_User_Id)
         {
-            if(User_Id == JWT_Claim_User_Id)
+            if (User_Id == JWT_Claim_User_Id)
             {
                 return true;
             }
@@ -74,8 +74,7 @@ namespace API.Providers
         public string Authenticate(Credentials Credentials)
         {
             User User = Query.User.FirstOrDefault(user => user.Email == Credentials.Email);
-            string Provided_Password_Hash = BCrypt.Net.BCrypt.HashPassword(Credentials.Password);
-            bool IsCorrect = BCrypt.Net.BCrypt.Verify(Credentials.Password, Provided_Password_Hash);
+            bool IsCorrect = BCrypt.Net.BCrypt.Verify(Credentials.Password, User.Password);
             if (User == null || !IsCorrect)
             {
                 return null;

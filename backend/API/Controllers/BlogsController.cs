@@ -44,6 +44,14 @@ namespace API.Controllers
             return Ok(Mapper.Map<IEnumerable<ReadBlog>>(Blogs));
         }
 
+        [HttpGet]
+        [Route("~/api/SearchBlogs/{search}")]
+        public ActionResult<IEnumerable<ReadBlog>> SearchBlogs(string search)
+        {
+            var Blogs = Blog_Provider.Search(search);
+            return Ok(Mapper.Map<IEnumerable<ReadBlog>>(Blogs));
+        }
+
         [Route("~/api/NewBlog")]
         [HttpPost]
         public ActionResult<ReadBlog> CreateBlog(WriteBlog _New_Blog)
@@ -58,7 +66,7 @@ namespace API.Controllers
         }
 
 
-        [HttpPut("{id}")] 
+        [HttpPut("{id}")]
         public ActionResult UpdateBlog(int Id, UpdateBlog UpdatedBlog)
         {
             var Blog = Blog_Provider.GetBlog(Id);
@@ -72,7 +80,7 @@ namespace API.Controllers
         }
 
 
-        [HttpDelete("{id}")]  
+        [HttpDelete("{id}")]
         public ActionResult DeleteBlog(int Id)
         {
             var Blog = Blog_Provider.GetBlog(Id);
